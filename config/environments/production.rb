@@ -70,7 +70,7 @@ Discourse::Application.configure do
 
   # allows admins to use mini profiler
   config.enable_mini_profiler = true
-
+  config.assets.initialize_on_precompile = false
   # allows Cross-origin resource sharing (CORS) for API access in JavaScript (default to false for security).
   # See the initializer and https://github.com/cyu/rack-cors for configuration documentation.
   #
