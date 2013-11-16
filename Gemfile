@@ -142,7 +142,7 @@ group :test do
   gem 'fakeweb', '~> 1.3.0', require: false
   gem 'minitest', require: false
 end
-
+gem 'rails_12factor', group: :production
 group :test, :development do
   gem 'mock_redis'
   gem 'listen', '0.7.3', require: false
