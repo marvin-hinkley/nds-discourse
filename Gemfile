@@ -143,6 +143,7 @@ group :test do
   gem 'minitest', require: false
 end
 gem 'rails_12factor', group: :production
+gem 'rollbar'
 group :test, :development do
   gem 'mock_redis'
   gem 'listen', '0.7.3', require: false
