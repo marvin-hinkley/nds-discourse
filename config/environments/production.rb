@@ -88,5 +88,13 @@ Discourse::Application.configure do
   if emails = ENV["DEVELOPER_EMAILS"]
     config.developer_emails = emails.split(",")
   end
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+       :port =>           '587',
+       :address =>        'smtp.mandrillapp.com',
+       :user_name =>      ENV['MANDRILL_USERNAME'],
+       :password =>       ENV['MANDRILL_APIKEY'],
+       :domain =>         'heroku.com',
+       :authentication => :plain
+  }
 end
