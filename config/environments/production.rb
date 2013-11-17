@@ -26,42 +26,6 @@ Discourse::Application.configure do
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found)
   config.i18n.fallbacks = true
-
-
-  # you may use other configuration here for mail eg: sendgrid
-
-  # config.action_mailer.delivery_method = :smtp
-  # config.action_mailer.smtp_settings = {
-  #   :address              => "smtp.sendgrid.net",
-  #   :port                 => 587,
-  #   :domain               => 'YOUR DOMAIN',
-  #   :user_name            => 'YOUR_USER',
-  #   :password             => 'YOUR_PASSWORD',
-  #   :authentication       => 'plain',
-  #   :enable_starttls_auto => true  }
-
-  if ENV.key?('SMTP_URL')
-    config.action_mailer.smtp_settings = begin
-      uri = URI.parse(ENV['SMTP_URL'])
-      params = {
-        :address              => uri.host,
-        :port                 => uri.port,
-        :domain               => (uri.path || "").split("/")[1],
-        :user_name            => uri.user,
-        :password             => uri.password,
-        :authentication       => 'plain',
-        :enable_starttls_auto => true
-      }
-      CGI.parse(uri.query || "").each {|k,v| params[k.to_sym] = v.first}
-      params
-    rescue
-      raise "Invalid SMTP_URL"
-    end
-  else
-    config.action_mailer.delivery_method = :sendmail
-    config.action_mailer.sendmail_settings = {arguments: '-i'}
-  end
-
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
